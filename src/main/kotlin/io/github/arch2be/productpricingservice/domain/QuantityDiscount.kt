@@ -3,9 +3,9 @@ package io.github.arch2be.productpricingservice.domain
 import java.util.UUID
 
 class QuantityDiscount(private val id: UUID,
-                       private val productId: UUID,
-                       private val min: Int,
-                       private val max: Int,
+                       val productId: UUID,
+                       val min: Int,
+                       val max: Int,
                        private val discount: Double) {
 
     init {

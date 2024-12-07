@@ -10,7 +10,7 @@ import java.util.UUID
 class GetProductServiceTest: ShouldSpec({
 
     val productTestRepository = ProductRepositoryTestImpl()
-    val getProductService = GetProductService(productTestRepository)
+    val sut = GetProductService(productTestRepository)
 
     should("should return ProductResult.Success with correct Product when pass uuid for existing Product") {
         // Given:
@@ -20,7 +20,7 @@ class GetProductServiceTest: ShouldSpec({
         productTestRepository.insert(product)
 
         // When:
-        val actualProductResult = getProductService.getProductById(productId)
+        val actualProductResult = sut.getProductById(productId)
 
         // Then:
         expectedProductResult shouldBe actualProductResult
@@ -35,7 +35,7 @@ class GetProductServiceTest: ShouldSpec({
         val expectedProductResult = ProductResult.NotFound("Product with id: $productId not found.")
 
         // When:
-        val actualProductResult = getProductService.getProductById(productId)
+        val actualProductResult = sut.getProductById(productId)
 
         // Then:
         expectedProductResult shouldBe actualProductResult

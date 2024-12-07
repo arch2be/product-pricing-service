@@ -2,7 +2,7 @@ package io.github.arch2be.productpricingservice.domain
 
 import java.util.UUID
 
-class FlatDiscount(private val id: UUID, private val productId: UUID, private val discount: Double) {
+class FlatDiscount(private val id: UUID, val productId: UUID, private val discount: Double) {
 
     init {
         if (discount <= 0.0) {

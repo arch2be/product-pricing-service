@@ -24,7 +24,7 @@ class CalculateTotalPriceForProductUseCaseService(
             return CalculationResult.Error("quantity must be greater than zero.")
         }
 
-        val product = productRepository.findProductByUUID(productId)
+        val product = productRepository.findById(productId)
 
         if (product === null) {
             return CalculationResult.NotFound("not found product by id: $productId")

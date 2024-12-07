@@ -10,7 +10,7 @@ import java.util.*
 class GetProductService(private val productRepository: ProductRepository) : GetProductUseCase {
 
     override fun getProductById(uuid: UUID): ProductResult {
-        val product = productRepository.findProductByUUID(uuid)
+        val product = productRepository.findById(uuid)
 
         return product?.let {
             ProductResult.Success(it)

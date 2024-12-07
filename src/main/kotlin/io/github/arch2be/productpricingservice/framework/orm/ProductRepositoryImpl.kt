@@ -10,7 +10,7 @@ import java.util.*
 @Repository
 class ProductRepositoryImpl: ProductRepository {
 
-    override fun findProductByUUID(uuid: UUID): Product? {
+    override fun findById(uuid: UUID): Product? {
         return transaction {
             ProductEntity
                 .selectAll()
