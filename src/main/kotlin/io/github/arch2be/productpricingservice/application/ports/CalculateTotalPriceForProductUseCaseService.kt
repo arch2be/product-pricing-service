@@ -2,45 +2,20 @@ package io.github.arch2be.productpricingservice.application.ports
 
 
 import io.github.arch2be.productpricingservice.application.ports.dto.CalculationResult
-import io.github.arch2be.productpricingservice.application.ports.out.FlatDiscountRepository
-import io.github.arch2be.productpricingservice.application.ports.out.ProductDiscountConfigurationRepository
-import io.github.arch2be.productpricingservice.application.ports.out.ProductRepository
-import io.github.arch2be.productpricingservice.application.ports.out.QuantityDiscountRepository
+import io.github.arch2be.productpricingservice.application.ports.dto.CartResult
+import io.github.arch2be.productpricingservice.application.ports.out.CartService
 import io.github.arch2be.productpricingservice.application.usecases.CalculateTotalPriceForProductUseCase
-import io.github.arch2be.productpricingservice.domain.CombiningType
+import io.github.arch2be.productpricingservice.domain.ProductId
+import io.github.arch2be.productpricingservice.domain.ProductQuantity
 import org.springframework.stereotype.Service
-import java.util.*
 
 @Service
-class CalculateTotalPriceForProductUseCaseService(
-    private val productDiscountConfigurationRepository: ProductDiscountConfigurationRepository,
-    private val quantityDiscountRepository: QuantityDiscountRepository,
-    private val flatDiscountRepository: FlatDiscountRepository,
-    private val productRepository: ProductRepository
-) : CalculateTotalPriceForProductUseCase {
+class CalculateTotalPriceForProductUseCaseService(private val cartService: CartService) : CalculateTotalPriceForProductUseCase {
 
-    override fun calculateTotalPriceBasedOnProductAndQuantity(productId: UUID, quantity: Int): CalculationResult {
-        if (quantity <= 0) {
-            return CalculationResult.Error("quantity must be greater than zero.")
+    override fun calculateTotalPriceBasedOnProductAndQuantity(productId: ProductId, quantity: ProductQuantity) : CalculationResult {
+        return when(val cartResult = cartService.loadForProductIdAndQuantity(productId, quantity)) {
+            is CartResult.Success -> CalculationResult.Success(cartResult.cart.calculateTotalPrice())
+            is CartResult.NotFound -> CalculationResult.NotFound(cartResult.message)
         }
-
-        val product = productRepository.findById(productId)
-
-        if (product === null) {
-            return CalculationResult.NotFound("not found product by id: $productId")
-        }
-
-        val baseTotalPrice = product.price * quantity
-
-        val flatDiscount = flatDiscountRepository.findByProductId(productId)
-            ?.calculateDiscount(baseTotalPrice) ?: 0.0
-
-        val quantityDiscount = quantityDiscountRepository.findByProductIdAndQuantity(productId, quantity)
-            ?.calculateDiscount(baseTotalPrice) ?: 0.0
-
-        val combiningType = productDiscountConfigurationRepository.findByProductId(productId)?.combiningType
-            ?: CombiningType.CHOOSE_THE_BEST
-
-        return CalculationResult.Success(baseTotalPrice - combiningType.combine(listOf(flatDiscount, quantityDiscount)))
     }
 }

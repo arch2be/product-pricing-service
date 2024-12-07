@@ -1,11 +1,16 @@
 package io.github.arch2be.productpricingservice.domain
 
-import java.util.UUID
+import java.math.BigDecimal
+import java.util.*
 
-class Product(val id: UUID, private val name: String, val price: Double) {
+data class Product(val id: ProductId, val name: ProductName, val price: ProductPrice)
+
+data class ProductId(val value: UUID)
+
+data class ProductName(val value: String)
+
+data class ProductPrice(val value: BigDecimal) {
     init {
-        if (price <= 0.0) {
-            throw RuntimeException("Product::price must be greater than zero")
-        }
+        require(value > BigDecimal.ZERO) { "ProductPrice.value must be greater than zero" }
     }
 }

@@ -4,5 +4,5 @@ import org.jetbrains.exposed.dao.id.UUIDTable
 
 object ProductEntity: UUIDTable("products") {
     val name = text("name")
-    val price = double("price")
+    val price = decimal("price", 5, 2)
 }

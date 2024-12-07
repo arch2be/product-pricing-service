@@ -2,13 +2,12 @@ package io.github.arch2be.productpricingservice.mock
 
 import io.github.arch2be.productpricingservice.application.ports.out.ProductRepository
 import io.github.arch2be.productpricingservice.domain.Product
-import java.util.UUID
-import kotlin.collections.HashMap
+import io.github.arch2be.productpricingservice.domain.ProductId
 
 class ProductRepositoryTestImpl: ProductRepository {
-    private val products = HashMap<UUID, Product>()
+    private val products = HashMap<ProductId, Product>()
 
-    override fun findById(uuid: UUID): Product? = products[uuid]
+    override fun findById(productId: ProductId): Product? = products[productId]
 
     fun insert(product: Product) {
         products[product.id] = product
