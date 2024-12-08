@@ -63,7 +63,7 @@ class CalculateTotalPriceForProductControllerTest : ShouldSpec() {
 
         this.should("should return 400 when uuid is not correct") {
             // Then:
-            mockMvc.get("/calculate?productId=21&quantity=1")
+            mockMvc.get("/api/calculate?productId=21&quantity=1")
                 .andExpect {
                     status { isBadRequest() }
                 }
@@ -71,7 +71,7 @@ class CalculateTotalPriceForProductControllerTest : ShouldSpec() {
 
         this.should("should return 400 when quantity empty") {
             // Then:
-            mockMvc.get("/calculate?productId=21&quantity=")
+            mockMvc.get("/api/calculate?productId=21&quantity=")
                 .andExpect {
                     status { isBadRequest() }
                 }
@@ -79,7 +79,7 @@ class CalculateTotalPriceForProductControllerTest : ShouldSpec() {
 
         this.should("should return 404 when product not found") {
             // Then:
-            mockMvc.get("/calculate?productId=6641e378-f928-4604-8109-9216af8996b9&quantity=1")
+            mockMvc.get("/api/calculate?productId=6641e378-f928-4604-8109-9216af8996b9&quantity=1")
                 .andExpect {
                     status { isNotFound() }
                 }
@@ -105,7 +105,7 @@ class CalculateTotalPriceForProductControllerTest : ShouldSpec() {
             }
 
             // Then:
-            mockMvc.get("/calculate?productId=${product.id.value}&quantity=$quantity")
+            mockMvc.get("/api/calculate?productId=${product.id.value}&quantity=$quantity")
                 .andExpect {
                     status { isOk() }
                     jsonPath("\$.price") { value(expectedPrice) }
@@ -146,7 +146,7 @@ class CalculateTotalPriceForProductControllerTest : ShouldSpec() {
             }
 
             // Then:
-            mockMvc.get("/calculate?productId=${product.id.value}&quantity=$quantity")
+            mockMvc.get("/api/calculate?productId=${product.id.value}&quantity=$quantity")
                 .andExpect {
                     status { isOk() }
                     jsonPath("\$.price") { value(expectedPrice) }
@@ -193,7 +193,7 @@ class CalculateTotalPriceForProductControllerTest : ShouldSpec() {
             }
 
             // Then:
-            mockMvc.get("/calculate?productId=${product.id.value}&quantity=$quantity")
+            mockMvc.get("/api/calculate?productId=${product.id.value}&quantity=$quantity")
                 .andExpect {
                     status { isOk() }
                     jsonPath("\$.price") { value(expectedPrice) }

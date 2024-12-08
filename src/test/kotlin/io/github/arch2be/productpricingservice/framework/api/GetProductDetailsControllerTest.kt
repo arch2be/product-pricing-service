@@ -50,7 +50,7 @@ class GetProductDetailsControllerTest : ShouldSpec() {
 
         this.should("should return 400 when uuid is not correct") {
             // Then:
-            mockMvc.get("/products/23")
+            mockMvc.get("/api/products/23")
                 .andExpect {
                     status { isBadRequest() }
                 }
@@ -58,7 +58,7 @@ class GetProductDetailsControllerTest : ShouldSpec() {
 
         this.should("should return 404 when correct uuid but not exists in DB") {
             // Then:
-            mockMvc.get("/products/6641e378-f928-4604-8109-9216af8996b9")
+            mockMvc.get("/api/products/6641e378-f928-4604-8109-9216af8996b9")
                 .andExpect {
                     status { isNotFound() }
                 }
@@ -82,7 +82,7 @@ class GetProductDetailsControllerTest : ShouldSpec() {
             }
 
             // Then:
-            mockMvc.get("/products/${expectedProduct.id.value}")
+            mockMvc.get("/api/products/${expectedProduct.id.value}")
                 .andExpect {
                     status { isOk() }
                     jsonPath("\$.id") { value(expectedProduct.id.value.toString()) }
