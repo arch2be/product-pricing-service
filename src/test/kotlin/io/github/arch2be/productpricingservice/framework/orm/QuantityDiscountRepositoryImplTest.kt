@@ -30,6 +30,7 @@ class QuantityDiscountRepositoryImplTest: ShouldSpec({
     }
 
     should("should return null result when quantity discount not exists in DB") {
+        // Then:
         quantityRepository.findDiscountByProductIdAndQuantity(UUID.randomUUID(), 1) shouldBe null
     }
 

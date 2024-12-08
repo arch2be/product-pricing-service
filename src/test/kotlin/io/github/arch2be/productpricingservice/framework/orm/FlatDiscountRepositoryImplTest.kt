@@ -31,6 +31,7 @@ class FlatDiscountRepositoryImplTest: ShouldSpec({
     }
 
     should("should return null result when flat discount not exists in DB") {
+        // Then:
         flatDiscountRepository.findDiscountByProductId(UUID.randomUUID()) shouldBe null
     }
 

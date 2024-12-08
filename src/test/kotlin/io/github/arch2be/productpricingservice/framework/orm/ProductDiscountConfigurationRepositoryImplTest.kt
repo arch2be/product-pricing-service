@@ -31,6 +31,7 @@ class ProductDiscountConfigurationRepositoryImplTest: ShouldSpec({
     }
 
     should("should return null result when product discount configuration not exists in DB") {
+        // Then:
         productDiscountConfigurationRepository.findCombineTypeByProductId(UUID.randomUUID()) shouldBe null
     }
 
@@ -54,6 +55,7 @@ class ProductDiscountConfigurationRepositoryImplTest: ShouldSpec({
             }
         }
 
+        // Then:
         productDiscountConfigurationRepository.findCombineTypeByProductId(productId) shouldBe expectedCombingType
     }
 })

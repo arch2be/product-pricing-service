@@ -33,6 +33,7 @@ class ProductRepositoryImplTest: ShouldSpec({
     }
 
     should("should return null result when product not exists in DB") {
+        // Then:
         productRepository.findById(ProductId(UUID.randomUUID())) shouldBe null
     }
 
