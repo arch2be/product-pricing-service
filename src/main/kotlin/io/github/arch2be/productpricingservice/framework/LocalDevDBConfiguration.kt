@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component
 import java.math.BigDecimal
 import java.util.*
 
-@Profile(value = ["dev", "dev-docker"])
+@Profile(value = ["dev"])
 @Component
 class LocalDevDBConfiguration: ApplicationRunner {
 

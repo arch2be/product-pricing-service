@@ -17,22 +17,13 @@ A RESTful service that calculates product prices based on configurable discount 
 
 ## Building and Running
 
-### Using Gradle
-
-```bash
-# Build the project
-./gradlew build
-
-# Run the application
-./gradlew bootRun --args='--spring.profiles.active=dev'
-```
-
 ### Using Docker
 
 ```bash
 # Build Docker image
 docker-compose up
 ```
+Running application with profile `dev` 
 
 ## API Endpoints
 
@@ -74,5 +65,5 @@ Run the tests using:
 
 ## Test data
 
-For profiles `dev, dev-docker` application create schemas and insert test data into database.
+For profiles `dev` application create schemas and insert test data into database.
 For test purposes there is one product with id: `7a81cfcd-c25b-4b65-9ea4-8eca89b39316`.
