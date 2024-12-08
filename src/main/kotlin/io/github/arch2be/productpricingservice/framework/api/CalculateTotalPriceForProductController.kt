@@ -4,6 +4,7 @@ import io.github.arch2be.productpricingservice.application.ports.dto.Calculation
 import io.github.arch2be.productpricingservice.application.usecases.CalculateTotalPriceForProductUseCase
 import io.github.arch2be.productpricingservice.domain.ProductId
 import io.github.arch2be.productpricingservice.domain.ProductQuantity
+import io.github.arch2be.productpricingservice.framework.api.dto.CalculationResponse
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -20,7 +21,7 @@ class CalculateTotalPriceForProductController(private val calculateTotalPriceFor
     fun calculateDiscountForProductWithQuantity(@RequestParam(name = "productId") productId: UUID,
                                                 @RequestParam(name = "quantity") quantity: Int): ResponseEntity<*> {
         return when(val productResult = calculateTotalPriceForProductUseCase.calculateTotalPriceBasedOnProductAndQuantity(ProductId(productId), ProductQuantity(quantity))) {
-            is CalculationResult.Success -> ResponseEntity.ok(productResult)
+            is CalculationResult.Success -> ResponseEntity.ok(CalculationResponse(productResult.totalPrice))
             is CalculationResult.NotFound -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(productResult.message)
         }
     }

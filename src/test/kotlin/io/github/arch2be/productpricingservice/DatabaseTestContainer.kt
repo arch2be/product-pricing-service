@@ -5,7 +5,7 @@ import com.zaxxer.hikari.HikariDataSource
 import org.testcontainers.containers.PostgreSQLContainer
 
 object DatabaseTestContainer {
-    private val dbContainer = PostgreSQLContainer("postgres:latest")
+    val dbContainer = PostgreSQLContainer("postgres:latest")
 
     init {
         dbContainer.start()
