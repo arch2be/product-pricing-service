@@ -14,7 +14,7 @@ class QuantityDiscountRepository {
         return transaction {
             QuantityDiscountEntity
                 .selectAll()
-                .where { (QuantityDiscountEntity.productId eq productId) and (QuantityDiscountEntity.min.greaterEq(quantity) and QuantityDiscountEntity.max.less(quantity))}
+                .where { (QuantityDiscountEntity.productId eq productId) and (QuantityDiscountEntity.min.less(quantity) and QuantityDiscountEntity.max.greaterEq(quantity))}
                 .firstOrNull()
                 ?.let { BigDecimal(it[QuantityDiscountEntity.discount]) }
         }

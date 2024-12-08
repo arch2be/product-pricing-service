@@ -11,10 +11,8 @@ class CombiningTypeTest: ShouldSpec({
         val expectedDiscount = BigDecimal(15.0)
         val discounts = listOf(BigDecimal(13.0), expectedDiscount)
 
-        // When:
-        val selectedDiscount = CombiningType.CHOOSE_THE_BEST.combine(discounts)
-
         // Then:
+        val selectedDiscount = CombiningType.CHOOSE_THE_BEST.combine(discounts)
         selectedDiscount shouldBe expectedDiscount
     }
 
@@ -23,10 +21,8 @@ class CombiningTypeTest: ShouldSpec({
         val expectedDiscount = BigDecimal(28.0)
         val discounts = listOf(BigDecimal(13.0), BigDecimal(15.0))
 
-        // When:
-        val selectedDiscount = CombiningType.CUMULATIVE.combine(discounts)
-
         // Then:
+        val selectedDiscount = CombiningType.CUMULATIVE.combine(discounts)
         selectedDiscount shouldBe expectedDiscount
     }
 })

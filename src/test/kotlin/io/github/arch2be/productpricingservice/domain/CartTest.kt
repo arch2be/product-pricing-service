@@ -39,9 +39,8 @@ class CartTest: ShouldSpec({
             listOf(Discount(BigDecimal(10)), Discount(BigDecimal(20))),
             null)
 
-        // When:
+        // Then:
         val calculatedTotalPrice = cart.calculateTotalPrice()
-
         calculatedTotalPrice shouldBe expectedTotalPrice
     }
 
@@ -56,7 +55,6 @@ class CartTest: ShouldSpec({
 
         // When:
         val calculatedTotalPrice = cart.calculateTotalPrice()
-
         calculatedTotalPrice shouldBe expectedTotalPrice
     }
 
@@ -69,9 +67,8 @@ class CartTest: ShouldSpec({
             listOf(Discount(BigDecimal(10)), Discount(BigDecimal(20))),
             CombiningType.CUMULATIVE)
 
-        // When:
+        // Then:
         val calculatedTotalPrice = cart.calculateTotalPrice()
-
         calculatedTotalPrice shouldBe expectedTotalPrice
     }
 
@@ -84,9 +81,8 @@ class CartTest: ShouldSpec({
             listOf(Discount(BigDecimal.ZERO), Discount(BigDecimal.ZERO)),
             CombiningType.CUMULATIVE)
 
-        // When:
+        // Then:
         val calculatedTotalPrice = cart.calculateTotalPrice()
-
         calculatedTotalPrice shouldBe expectedTotalPrice
     }
 })

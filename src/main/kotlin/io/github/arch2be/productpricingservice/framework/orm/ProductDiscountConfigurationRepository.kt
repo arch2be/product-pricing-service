@@ -13,7 +13,7 @@ class ProductDiscountConfigurationRepository {
         return transaction {
             ProductDiscountConfigurationEntity
                 .selectAll()
-                .where { ProductDiscountConfigurationEntity.id eq productId }
+                .where { ProductDiscountConfigurationEntity.productId eq productId }
                 .firstOrNull()
                 ?.let { it[ProductDiscountConfigurationEntity.combiningType] }
         }
