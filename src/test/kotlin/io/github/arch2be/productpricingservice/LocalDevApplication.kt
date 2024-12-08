@@ -8,5 +8,6 @@ class LocalDevApplication
 fun main(args: Array<String>) {
     runApplication<ProductPricingServiceApplication>(*args) {
         DatabaseTestContainer::class
+        setDefaultProperties(mapOf("spring.profiles.active" to "dev"))
     }
 }

@@ -71,3 +71,8 @@ Run the tests using:
 ```bash
 ./gradlew test
 ```
+
+## Test data
+
+For profiles `dev, dev-docker` application create schemas and insert test data into database.
+For test purposes there is one product with id: `7a81cfcd-c25b-4b65-9ea4-8eca89b39316`.
