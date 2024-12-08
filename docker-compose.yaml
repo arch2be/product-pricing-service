@@ -1,0 +1,29 @@
+version: "3.2"
+services:
+  web:
+    container_name: product-pricing-service
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      DATABASE_HOST: db-product-pricing-service
+      DATABASE_NAME: product-pricing
+      DATABASE_PORT: 5432
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: postgres
+  db:
+    image: postgres:latest
+    container_name: db-product-pricing-service
+    ports:
+      - "5432:5432"
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      PGUSER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: product-pricing
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready" ]
+      interval: 1s
+      timeout: 5s
+      retries: 10

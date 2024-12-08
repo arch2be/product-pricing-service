@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController
 import java.util.*
 
 @RestController
-@RequestMapping(value = ["/calculate"])
+@RequestMapping(value = ["/api/calculate"])
 class CalculateTotalPriceForProductController(private val calculateTotalPriceForProductUseCase: CalculateTotalPriceForProductUseCase) {
 
     @GetMapping

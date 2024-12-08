@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController
 import java.util.*
 
 @RestController
-@RequestMapping(value = ["/products"])
+@RequestMapping(value = ["/api/products"])
 class GetProductDetailsController(val getProductUseCase: GetProductUseCase) {
 
     @GetMapping(value = ["/{productId}"])
