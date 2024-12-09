@@ -8,7 +8,6 @@ A RESTful service that calculates product prices based on configurable discount 
 - Dynamic price calculation with configurable discounts:
     - Quantity-based discounts (increasing with quantity)
     - Percentage-based discounts (flat rate)
-- TestContainers postgresql database for development
 
 ## Prerequisites
 
