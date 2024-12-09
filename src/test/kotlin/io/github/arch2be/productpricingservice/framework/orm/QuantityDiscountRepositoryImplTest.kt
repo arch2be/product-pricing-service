@@ -37,7 +37,7 @@ class QuantityDiscountRepositoryImplTest: ShouldSpec({
     should("should return correct discount when quantity discount exists in DB") {
         // Given:
         val productId = UUID.randomUUID()
-        val quantity = 10
+        val quantity = 20
         val expectedDiscount = BigDecimal(10.0)
 
         // When:
@@ -54,6 +54,14 @@ class QuantityDiscountRepositoryImplTest: ShouldSpec({
                 it[this.min] = 1
                 it[this.max] = 20
                 it[this.discount] = 10.0
+            }
+
+            QuantityDiscountEntity.insert {
+                it[this.id] = UUID.randomUUID()
+                it[this.productId] = productId
+                it[this.min] = 21
+                it[this.max] = 30
+                it[this.discount] = 15.0
             }
         }
 
